@@ -1,0 +1,258 @@
+{
+  "mappings" : [
+    {
+      "id" : "cf796328-38b8-4200-b0e1-c3ac5a83532b",
+      "name" : "GET all contacts",
+      "request" : {
+        "urlPath" : "/v1/contacts",
+        "method" : "GET"
+      },
+      "response" : {
+        "status" : 200,
+        "body" : "{\n  \"contacts\": [\n    {\n      \"id\": \"11111\",\n      \"firstName\": \"Tom\",\n      \"lastName\": \"Smith\",\n      \"email\": \"tom.smith@example.com\",\n      \"dateAdded\": \"2021-01-03\",\n      \"companyId\": \"123\"\n    },\n    {\n      \"id\": \"22222\",\n      \"firstName\": \"Suki\",\n      \"lastName\": \"Patel\",\n      \"email\": \"spatel@example.com\",\n      \"dateAdded\": \"2020-11-12\",\n      \"companyId\": \"123\"\n    },\n    {\n      \"id\": \"33333\",\n      \"firstName\": \"Lexine\",\n      \"lastName\": \"Barnfield\",\n      \"email\": \"barnfield8@example.com\",\n      \"dateAdded\": \"2021-01-03\",\n      \"companyId\": \"234\"\n    }\n  ]\n}",
+        "headers" : {
+          "Content-Type" : "application/json"
+        }
+      },
+      "uuid" : "cf796328-38b8-4200-b0e1-c3ac5a83532b",
+      "persistent" : true,
+      "priority" : 5,
+      "metadata" : {
+        "mocklab" : {
+          "created" : {
+            "at" : "2021-01-04T11:51:43.187Z",
+            "via" : "ADMIN_API",
+            "by" : "7p1dp"
+          }
+        }
+      }
+    },
+    {
+      "id" : "aa8abf9a-0ae9-49de-b415-6e47e25b89b8",
+      "name" : "GET company 123 contacts ",
+      "request" : {
+        "urlPath" : "/v1/contacts",
+        "method" : "GET",
+        "queryParameters" : {
+          "companyId" : {
+            "equalTo" : "123"
+          }
+        }
+      },
+      "response" : {
+        "status" : 200,
+        "body" : "{\n  \"contacts\": [\n    {\n      \"id\": \"11111\",\n      \"firstName\": \"Tom\",\n      \"lastName\": \"Smith\",\n      \"email\": \"tom.smith@example.com\",\n      \"dateAdded\": \"2021-01-03\",\n      \"companyId\": \"123\"\n    },\n    {\n      \"id\": \"22222\",\n      \"firstName\": \"Suki\",\n      \"lastName\": \"Patel\",\n      \"email\": \"spatel@example.com\",\n      \"dateAdded\": \"2020-11-12\",\n      \"companyId\": \"123\"\n    }\n  ]\n}",
+        "headers" : {
+          "Content-Type" : "application/json"
+        }
+      },
+      "uuid" : "aa8abf9a-0ae9-49de-b415-6e47e25b89b8",
+      "persistent" : true,
+      "priority" : 5,
+      "metadata" : {
+        "mocklab" : {
+          "created" : {
+            "at" : "2021-01-04T13:08:07.456Z",
+            "via" : "ADMIN_API",
+            "by" : "7p1dp"
+          },
+          "updated" : {
+            "at" : "2021-01-04T13:08:16.081Z",
+            "via" : "ADMIN_API",
+            "by" : "7p1dp"
+          }
+        }
+      }
+    },
+    {
+      "id" : "f3802db6-7bcb-4c43-adde-33d55d44c163",
+      "name" : "GET individual contact",
+      "request" : {
+        "urlPathPattern" : "/v1/contacts/[0-9]{1,10}",
+        "method" : "GET"
+      },
+      "response" : {
+        "status" : 200,
+        "body" : "{\n  \"contact\": {\n      \"id\": \"{{{request.pathSegments.2}}}\",\n      \"firstName\": \"{{{randomValue length=6 type='ALPHANUMERIC'}}}\",\n      \"lastName\": \"{{{randomValue length=10 type='ALPHANUMERIC'}}}\",\n      \"email\": \"{{{randomValue length=12 type='ALPHANUMERIC'}}}@example.com\",\n      \"dateAdded\": \"{{{now offset='3 months' format='yyyy-MM-dd'}}}\",\n      \"companyId\": \"123\"\n    }\n}\n\n",
+        "headers" : {
+          "Content-Type" : "application/json"
+        },
+        "transformers" : [ "response-template" ]
+      },
+      "uuid" : "f3802db6-7bcb-4c43-adde-33d55d44c163",
+      "persistent" : true,
+      "priority" : 5,
+      "metadata" : {
+        "mocklab" : {
+          "created" : {
+            "at" : "2021-01-04T13:09:24.964Z",
+            "via" : "ADMIN_API",
+            "by" : "7p1dp"
+          },
+          "updated" : {
+            "at" : "2021-01-04T15:04:54.04Z",
+            "via" : "ADMIN_API",
+            "by" : "7p1dp"
+          }
+        }
+      }
+    },
+    {
+      "id" : "bce79e4b-4301-42e7-867a-a0142aee0c05",
+      "name" : "Create new contact",
+      "request" : {
+        "urlPath" : "/v1/contacts",
+        "method" : "POST",
+        "bodyPatterns" : [ {
+          "equalToJson" : "{\n  \"contact\": {\n      \"id\": \"${json-unit.any-string}\",\n      \"firstName\": \"${json-unit.any-string}\",\n      \"lastName\": \"${json-unit.any-string}\",\n      \"email\": \"${json-unit.regex}[a-z0-9+_.-]+@[^.]+\\\\.[^.]+$\",\n      \"dateAdded\": \"${json-unit.regex}[0-9]{4}-[0-9]{2}-[0-9]{2}\",\n      \"companyId\": \"${json-unit.any-string}\"\n    }\n}"
+        } ]
+      },
+      "response" : {
+        "status" : 201,
+        "body" : "",
+        "headers" : { }
+      },
+      "uuid" : "bce79e4b-4301-42e7-867a-a0142aee0c05",
+      "persistent" : true,
+      "priority" : 5,
+      "metadata" : {
+        "mocklab" : {
+          "created" : {
+            "at" : "2021-01-04T16:33:56.322Z",
+            "via" : "ADMIN_API",
+            "by" : "7p1dp"
+          }
+        }
+      }
+    },
+    {
+      "id" : "0cdea85b-f94d-401f-979b-ef0f6a2b8c42",
+      "name" : "Company list - 1 item",
+      "request" : {
+        "urlPath" : "/v1/companies",
+        "method" : "GET"
+      },
+      "response" : {
+        "status" : 200,
+        "body" : "{\n  \"companies\": [\n    {\n      \"id\": 123,\n      \"name\": \"Boring Corp\"\n    }\n  ]\n}",
+        "headers" : {
+          "Content-Type" : "application/json"
+        }
+      },
+      "uuid" : "0cdea85b-f94d-401f-979b-ef0f6a2b8c42",
+      "persistent" : true,
+      "priority" : 5,
+      "scenarioName" : "Companies",
+      "requiredScenarioState" : "Started",
+      "metadata" : {
+        "mocklab" : {
+          "created" : {
+            "at" : "2021-01-04T17:23:14.87Z",
+            "via" : "ADMIN_API",
+            "by" : "7p1dp"
+          }
+        }
+      }
+    },
+    {
+      "id" : "537e4d3c-90b8-47e3-982a-06b9d1f29067",
+      "name" : "Company list - 2 items",
+      "request" : {
+        "urlPath" : "/v1/companies",
+        "method" : "GET"
+      },
+      "response" : {
+        "status" : 200,
+        "body" : "{\n  \"companies\": [\n    {\n      \"id\": 123,\n      \"name\": \"Boring Corp\"\n    },\n    {\n      \"id\": 234,\n      \"name\": \"Az Tech\" \n    }\n  ]\n}",
+        "headers" : {
+          "Content-Type" : "application/json"
+        }
+      },
+      "uuid" : "537e4d3c-90b8-47e3-982a-06b9d1f29067",
+      "persistent" : true,
+      "priority" : 5,
+      "scenarioName" : "Companies",
+      "requiredScenarioState" : "2 companies",
+      "metadata" : {
+        "mocklab" : {
+          "created" : {
+            "at" : "2021-01-04T17:23:56.255Z",
+            "via" : "ADMIN_API",
+            "by" : "7p1dp"
+          }
+        }
+      }
+    },
+    {
+    "id" : "6d65c689-8362-4c22-afe1-9ea0d7652922",
+    "name" : "Create new company",
+    "request" : {
+      "url" : "/v1/companies",
+      "method" : "POST",
+      "bodyPatterns" : [ {
+        "equalToJson" : "{\n  \"id\": 234,\n  \"name\": \"Az Tech\"\n}"
+      } ]
+    },
+    "response" : {
+      "status" : 201,
+      "body" : "",
+      "headers" : { }
+    },
+    "uuid" : "6d65c689-8362-4c22-afe1-9ea0d7652922",
+    "persistent" : true,
+    "priority" : 5,
+    "scenarioName" : "Companies",
+    "requiredScenarioState" : "Started",
+    "newScenarioState" : "2 companies",
+    "metadata" : {
+      "mocklab" : {
+        "created" : {
+          "at" : "2021-01-04T17:39:51.402Z",
+          "via" : "ADMIN_API",
+          "by" : "7p1dp"
+        },
+        "updated" : {
+          "at" : "2021-01-04T17:50:17.104Z",
+          "via" : "ADMIN_API",
+          "by" : "7p1dp"
+        }
+      }
+    }
+  },
+  {
+    "id" : "949e4375-47bd-4ff0-9a8c-a152f4f1de3b",
+    "name" : "Create new contact - error",
+    "request" : {
+      "urlPath" : "/v1/contacts",
+      "method" : "POST",
+      "bodyPatterns" : [ {
+        "matchesJsonPath" : {
+          "expression" : "$.contact.id",
+          "equalTo" : "666"
+        }
+      } ]
+    },
+    "response" : {
+      "status" : 503,
+      "body" : "The API is currently unavailable",
+      "headers" : {
+        "Content-Type" : "text/plain"
+      }
+    },
+    "uuid" : "949e4375-47bd-4ff0-9a8c-a152f4f1de3b",
+    "persistent" : true,
+    "priority" : 5,
+    "metadata" : {
+      "mocklab" : {
+        "created" : {
+          "at" : "2021-01-05T11:04:11.626Z",
+          "via" : "ADMIN_API",
+          "by" : "7p1dp"
+        }
+      }
+    }
+  }],
+  "meta" : {
+    "total" : 8
+  }
+}
