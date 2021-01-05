@@ -73,7 +73,7 @@
       },
       "response" : {
         "status" : 200,
-        "body" : "{\n  \"contact\": {\n      \"id\": \"{{{request.pathSegments.2}}}\",\n      \"firstName\": \"{{{randomValue length=6 type='ALPHANUMERIC'}}}\",\n      \"lastName\": \"{{{randomValue length=10 type='ALPHANUMERIC'}}}\",\n      \"email\": \"{{{randomValue length=12 type='ALPHANUMERIC'}}}@example.com\",\n      \"dateAdded\": \"{{{now offset='3 months' format='yyyy-MM-dd'}}}\",\n      \"companyId\": \"123\"\n    }\n}\n\n",
+        "body" : "{\n  \"contact\": {\n      \"id\": \"{{{request.pathSegments.2}}}\",\n      \"firstName\": \"{{{randomValue length=6 type='ALPHANUMERIC'}}}\",\n      \"lastName\": \"{{{randomValue length=10 type='ALPHANUMERIC'}}}\",\n      \"email\": \"{{{randomValue length=12 type='ALPHANUMERIC'}}}@example.com\",\n      \"dateAdded\": \"{{{now offset='-3 months' format='yyyy-MM-dd'}}}\",\n      \"companyId\": \"123\"\n    }\n}\n\n",
         "headers" : {
           "Content-Type" : "application/json"
         },
