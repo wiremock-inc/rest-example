@@ -48,7 +48,7 @@
       },
       "uuid" : "aa8abf9a-0ae9-49de-b415-6e47e25b89b8",
       "persistent" : true,
-      "priority" : 5,
+      "priority" : 3,
       "metadata" : {
         "mocklab" : {
           "created" : {
